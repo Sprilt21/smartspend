@@ -41,6 +41,7 @@ def signup(baseurl):
     url = baseurl + api
     
     res = requests.post(url, json=data)
+    print(res)
     print(res.text)
     
     if res.status_code == 200:
@@ -50,11 +51,12 @@ def signup(baseurl):
         
 def login(baseurl):
     
+    logged_in = False
+    
     print("-------Log In-------")
     
     api = '/log-in'
     url = baseurl + api
-    logged_in = False
     
     while not logged_in:
         print("Enter your username:")
@@ -63,13 +65,16 @@ def login(baseurl):
         password = input("> ")
         
         data = {
-            "username": username,
+            "username": username, 
             "password": password
         }
         
+        print(url)
         res = requests.post(url, json=data)
+        
         print(res.text)
         
+        print(res.status_code)
         if res.status_code == 200:
             print("Log-in successful!")
             body = res.json()
