@@ -107,6 +107,7 @@ def main():
                 # TODO: save_transaction()
             case _:
                 print("---Exited SmartSpend---")
+                break
         
 if __name__ == "__main__":
     main()
