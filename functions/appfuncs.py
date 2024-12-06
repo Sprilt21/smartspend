@@ -17,16 +17,73 @@ import uuid
 import json
 
 def add_budget(baseurl, username):
+    print("Enter the budget name:")
+    budget_name = input("> ")
+    print("Enter the budget amount:")
+    budget_amt = input("> ")
     
-    #basically going to be entirely like project03 - just upload a budget to the database, no s3 here
+    if not budget_name or not budget_amt:
+        print("Error: Budget name and amount are required")
+        return None
+    
+    if budget_amt < 0:
+        print("Error: budget must be positive")
+        return None
+
+    data = {
+        "username": username,
+        "budget_name": budget_name,
+        "budget_amt": float(budget_amt)
+    }
+    
+    api = '/add-budget'
+    url = baseurl + api
         
-    pass
+    res = requests.post(url, json=data)
+        
+    if res.status_code == 200:
+        budget_id = res.json()
+        print(f"Budget '{budget_name}' successfully added!")
+        return {
+            "budget_id": budget_id,
+            "budget_name": budget_name,
+            "budget_amt": budget_amt
+        }
+    else:
+        print(f"Error: {res.text}")
+        return None
 
 def edit_budget(baseurl, username):
+    print("Enter the name of the budget you want to edit")
+    budget_name = input("> ")
+    print("Enter the new budget amount")
+    budget_amt = input("> ")
+
+    if not budget_name or not budget_amt:
+        print("Error: Budget name and amount are required")
+        return None
+
+    if budget_amt < 0:
+        print("Error: budget must be positive")
+        return None
+
+    data = {
+        "username": username,
+        "budget_name": budget_name,
+        "budget_amt": budget_amt,
+    }
+
+    api = '/edit-budget'
+    url = baseurl + api
+        
+    res = requests.patch(url, json=data)
     
-    #get a budget, update the max amount, and upload the updated budget to the database
-    
-    pass
+    if res.status_code == 200:
+        print("Budget updated successfully!")
+        return True
+    else:
+        print(f"Error updating budget: {res.text}")
+        return None
 
 def view_budgets_summary(baseurl, username):
     
@@ -34,8 +91,38 @@ def view_budgets_summary(baseurl, username):
         # get the sum of all budgets and the sum of all transactions
         # display the sum of all budgets and the sum of all transactions
         # display the remaining budget as a percentage of the total budget
+
+    data = {
+        "username": username,
+    }
+    
+    api = '/budgets'
+    url = baseurl + api
         
-    pass
+    res = requests.get(url, json=data)
+        
+    if res.status_code == 200:
+        budgets = res.json()
+            
+        if not budgets:
+            print("No budgets found.")
+            return None
+                
+        print("\nYour current budgets:")
+        print("------------------------")
+        for budget in budgets:
+            budget_name, budget_amt, current_amt = budget
+            print(f"Budget: {budget_name}")
+            print(f"Amount: ${budget_amt:.2f}")
+            print(f"Current Amount: ${current_amt:.2f}")
+            print(f"Remaining: ${budget_amt - current_amt:.2f}")
+            print("------------------------")
+            
+        return budgets
+            
+    else:
+        print(f"Error retrieving budgets: {res.text}")
+        return None
 
 def add_transaction(baseurl, username):
     

@@ -23,9 +23,9 @@ class Client:
 def prompts():
     print("1. Add a budget")
     print("2. Edit a budget")
-    print("2. View budgets summary")
-    print("3. Add a transaction")
-    print("4. Save transaction")
+    print("3. View budgets summary")
+    print("4. Add a transaction")
+    print("5. Save transaction")
     print("6. Log out and Exit")
     s = input("Enter 1-6> ")
     return s        
@@ -91,14 +91,13 @@ def main():
         match s:
             case "1":
                 print("-----Add a Budget------")
-                # TODO: add_budget()
-                
+                add_budget(baseurl, username)
             case "2":
                 print("------Edit Budget------")
-                # TODO: edit_budget()
+                edit_budget(baseurl, username)
             case "3":
                 print("----Budget Summary-----")
-                # TODO: view_budgets_summary()
+                view_budgets_summary(baseurl, username)
             case "4":
                 print("----New Transaction----")
                 # TODO: add_transaction()
