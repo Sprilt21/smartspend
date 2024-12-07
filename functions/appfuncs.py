@@ -174,7 +174,7 @@ def add_transaction(baseurl, username):
         "budget_name": budget_name,
         "filename": receipt_img,
         "datastr": datastr,
-        "description": description
+        "desc": description
     }
     
     api = '/add_transaction/' + username
