@@ -100,7 +100,7 @@ def main():
                 view_budgets_summary(baseurl, username)
             case "4":
                 print("----New Transaction----")
-                # TODO: add_transaction()
+                add_transaction(baseurl,username)
             case "5":
                 print("---Save Transaction----")
                 # TODO: save_transaction()
