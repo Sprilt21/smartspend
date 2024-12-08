@@ -13,11 +13,7 @@
 #   - Stephi Lyou
 #   - Serena Lyou
 from configparser import ConfigParser
-import os
-import boto3
 import requests
-import uuid
-import json
 from pathlib import Path
 import base64
 

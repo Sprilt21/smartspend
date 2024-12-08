@@ -1,8 +1,7 @@
 Transaction ID: 1001
 User ID: 20002
-User Name: s
-Budget: 1002
-Transaction Amount: 8.36
-Transaction Description: target
+User Name: jovyzhou
+Budget Name: Food
+Transaction Amount: 978.88
+Transaction Description: Chiu Quon
 Transaction Date: 2024-12-08
-Receipt Bucket Key: smartspend/s/IMG_0345-d13760c4-4709-41d3-a24e-ffe1ecd5baa3.JPG

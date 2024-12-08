@@ -41,12 +41,12 @@ def signup(baseurl):
     url = baseurl + api
     
     res = requests.post(url, json=data)
-    print(res)
-    print(res.text)
+    #print(res)
+    #print(res.text)
     
     if res.status_code == 200:
         print("Sign up successful!")
-        print(res.json())
+        #print(res.json())
         return [username, first_name, last_name]
         
 def login(baseurl):

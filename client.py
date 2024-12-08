@@ -9,7 +9,6 @@
 
 import sys
 import pathlib
-import requests
 from functions.auth import signup, login
 from functions.appfuncs import *
 

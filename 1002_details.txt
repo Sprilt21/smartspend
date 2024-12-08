@@ -1,7 +1,7 @@
 Transaction ID: 1002
-User ID: 20004
-User Name: st
-Budget Name: funny haha
-Transaction Amount: 978.88
-Transaction Description: funny
+User ID: 20003
+User Name: nickqiu
+Budget Name: LOL
+Transaction Amount: 8.36
+Transaction Description: target
 Transaction Date: 2024-12-08
