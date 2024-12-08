@@ -177,7 +177,7 @@ def add_transaction(baseurl, username):
         "budget_name": budget_name,
         "filename": receipt_img,
         "datastr": datastr,
-        "description": description
+        "desc": description
     }
     
     api = '/add_transaction/' + username
@@ -213,37 +213,32 @@ def view_transaction(baseurl, username):
         if not transaction_id:
             print("Error: transaction id is required")
             return None
-        
-        data = {
-            "username": username
-        }
 
         api = '/view_transaction/' + transaction_id
         url = baseurl + api
-        res = requests.get(url, json=data)
-
+        res = requests.get(url)
         if res.status_code == 200:
             data = res.json()
-            image = data['img']
-            details = data['details']
+            image = data[0]
+            details = data[1]
             if not image or not details:
                 print("Error: transaction not found")
                 return None
             
             image_file = f"{transaction_id}_receipt.jpg"
-            imgdata = base64.b64decode(image.encode('utf-8')).decode('utf-8')
-            imgfile = open(image_file, "wb")
-            imgfile.write(imgdata)
-            imgfile.close()
+            with open(image_file, "wb") as img_file:
+                img_file.write(base64.b64decode(image))
 
             details_file = f"{transaction_id}_details.txt"
-            detailsfile = open(details_file, "w")
-            detailsfile.write(details)
-            detailsfile.close()
-            
-            print(f"Transaction details written to {details_file}")
-            print(f"Transaction image written to {image_file}")
-            return True
+            with open(details_file, "w") as det_file:
+                det_file.write(base64.b64decode(details).decode("utf-8"))
+
+            print(f"Transaction details saved to {details_file}")
+            print(f"Receipt image saved to {image_file}")
+            return {
+                "image": image_file,
+                "details": details_file
+            }
     except Exception as e:
         print("**ERROR: view_transaction failed")
         print(f"Error: {e}")

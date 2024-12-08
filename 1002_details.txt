@@ -1,0 +1,7 @@
+Transaction ID: 1002
+User ID: 20003
+Budget: 1003
+Transaction Amount: 0.00
+Transaction Description: cq
+Transaction Date: 2024-12-07
+Receipt Bucket Key: smartspend/lyoust/junkdata-c5fa14a6-acf7-4ee2-a682-0610478ebf30.jpeg

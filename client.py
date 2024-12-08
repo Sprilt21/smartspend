@@ -99,11 +99,11 @@ def main():
                 view_budgets_summary(baseurl, username)
         elif s == "4":
                 print("----New Transaction----")
-                # TODO: add_transaction()
+                add_transaction(baseurl, username)
         elif s == "5":
-                print("---Save Transaction----")
-                # TODO: save_transaction()
-        elif s == "":
+                print("---View Transaction----")
+                view_transaction(baseurl, username)
+        else:
                 print("---Exited SmartSpend---")
                 break
         
