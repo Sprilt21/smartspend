@@ -69,16 +69,16 @@ def login(baseurl):
             "password": password
         }
         
-        print(url)
+        #print(url)
         res = requests.post(url, json=data)
         
-        print(res.text)
+        #print(res.text)
         
-        print(res.status_code)
+        #print(res.status_code)
         if res.status_code == 200:
             print("Log-in successful!")
             body = res.json()
-            print(body)
+            #print(body)
             logged_in = True
             
             return [username, body["first_name"], body["last_name"]]

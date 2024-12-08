@@ -32,7 +32,7 @@ def add_budget(baseurl, username):
         print("Error: Budget amount must be a number")
         return None
     
-    print(budget_amt)
+    #print(budget_amt)
     if not budget_name or not budget_amt:
         print("Error: Budget name and amount are required")
         return None
@@ -139,7 +139,7 @@ def view_budgets_summary(baseurl, username):
         
         print(f"Total Budgeted: ${budgeted_total:.2f}")
         print(f"Total Current: ${current_total:.2f}")
-        print(f"Percent of budget used; {(current_total / budgeted_total) * 100:.2f}%")
+        print(f"Percent of budget used: {(current_total / budgeted_total) * 100:.2f}%")
         return budgets
             
     else:
@@ -182,12 +182,12 @@ def add_transaction(baseurl, username):
     
     api = '/add_transaction/' + username
     url = baseurl + api
-    print(api)
+    #print(api)
     res = requests.post(url, json=data)
     
     if res.status_code == 200:
         transaction_id = res.json()
-        print(f"Transaction with id '{transaction_id}' successfully added!")
+        print(f"Transaction with ID '{transaction_id}' successfully added!")
         return {
             "transaction_id": transaction_id,
             "budget_name": budget_name,

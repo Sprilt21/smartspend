@@ -81,8 +81,9 @@ def main():
         username, first_name, last_name = login(baseurl)
     
     client = Client(username, first_name, last_name)
-        
-    print("Welcome, ", client.firstname, " ", client.lastname, "!")
+    
+    print("-----------------------")
+    print("Welcome, " + client.firstname + " " + client.lastname + "!")
     
     s = 0
     while s != 6:
