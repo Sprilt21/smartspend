@@ -224,6 +224,21 @@ def view_transaction(baseurl, username):
             if not image or not details:
                 print("Error: transaction not found")
                 return None
+
+            decoded_details = base64.b64decode(details).decode("utf-8")
+
+            transaction_username = None
+            for line in decoded_details.split("\n"):
+                if "User Name:" in line:
+                    transaction_username = line.split(":")[1].strip()
+
+            if not transaction_username:
+                print("Error: Could not extract username from transaction details")
+                return None
+
+            if transaction_username != username:
+                print("Error: not authorized to view this transaction")
+                return None
             
             image_file = f"{transaction_id}_receipt.jpg"
             with open(image_file, "wb") as img_file:
@@ -232,13 +247,17 @@ def view_transaction(baseurl, username):
             details_file = f"{transaction_id}_details.txt"
             with open(details_file, "w") as det_file:
                 det_file.write(base64.b64decode(details).decode("utf-8"))
-
+            
             print(f"Transaction details saved to {details_file}")
             print(f"Receipt image saved to {image_file}")
             return {
                 "image": image_file,
                 "details": details_file
             }
+        else:
+            print("**ERROR: view_transaction failed")
+            print(f"Error: {res.json()}")
+            return None    
     except Exception as e:
         print("**ERROR: view_transaction failed")
         print(f"Error: {e}")

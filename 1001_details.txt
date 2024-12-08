@@ -1,7 +1,8 @@
 Transaction ID: 1001
 User ID: 20002
+User Name: s
 Budget: 1002
-Transaction Amount: 0.00
-Transaction Description: cq
-Transaction Date: 2024-12-07
-Receipt Bucket Key: smartspend/s/IMG_0333-4ec623e4-4df4-4b7a-8442-dbc279878d52.JPG
+Transaction Amount: 8.36
+Transaction Description: target
+Transaction Date: 2024-12-08
+Receipt Bucket Key: smartspend/s/IMG_0345-d13760c4-4709-41d3-a24e-ffe1ecd5baa3.JPG
