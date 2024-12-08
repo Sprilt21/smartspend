@@ -88,23 +88,22 @@ def main():
     while s != 6:
         s = prompts()
         
-        match s:
-            case "1":
+        if s == "1":
                 print("-----Add a Budget------")
                 add_budget(baseurl, username)
-            case "2":
+        elif s == "2":
                 print("------Edit Budget------")
                 edit_budget(baseurl, username)
-            case "3":
+        elif s == "3":
                 print("----Budget Summary-----")
                 view_budgets_summary(baseurl, username)
-            case "4":
+        elif s == "4":
                 print("----New Transaction----")
-                add_transaction(baseurl,username)
-            case "5":
+                # TODO: add_transaction()
+        elif s == "5":
                 print("---Save Transaction----")
                 # TODO: save_transaction()
-            case _:
+        elif s == "":
                 print("---Exited SmartSpend---")
                 break
         

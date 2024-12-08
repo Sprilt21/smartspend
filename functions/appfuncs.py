@@ -12,6 +12,9 @@
 #   - Nicholas Qiu
 #   - Stephi Lyou
 #   - Serena Lyou
+from configparser import ConfigParser
+import os
+import boto3
 import requests
 import uuid
 import json
@@ -174,7 +177,7 @@ def add_transaction(baseurl, username):
         "budget_name": budget_name,
         "filename": receipt_img,
         "datastr": datastr,
-        "desc": description
+        "description": description
     }
     
     api = '/add_transaction/' + username
@@ -200,5 +203,48 @@ def add_transaction(baseurl, username):
 def view_transaction(baseurl, username):
     
     #download an image from s3 and save to a file + write other contents transaction contents to another file
-    
-    pass
+    #
+    # setup AWS based on config file:
+    #
+    try: 
+        print("Enter the transaction id:")
+        transaction_id = input("> ")
+
+        if not transaction_id:
+            print("Error: transaction id is required")
+            return None
+        
+        data = {
+            "username": username
+        }
+
+        api = '/view_transaction/' + transaction_id
+        url = baseurl + api
+        res = requests.get(url, json=data)
+
+        if res.status_code == 200:
+            data = res.json()
+            image = data['img']
+            details = data['details']
+            if not image or not details:
+                print("Error: transaction not found")
+                return None
+            
+            image_file = f"{transaction_id}_receipt.jpg"
+            imgdata = base64.b64decode(image.encode('utf-8')).decode('utf-8')
+            imgfile = open(image_file, "wb")
+            imgfile.write(imgdata)
+            imgfile.close()
+
+            details_file = f"{transaction_id}_details.txt"
+            detailsfile = open(details_file, "w")
+            detailsfile.write(details)
+            detailsfile.close()
+            
+            print(f"Transaction details written to {details_file}")
+            print(f"Transaction image written to {image_file}")
+            return True
+    except Exception as e:
+        print("**ERROR: view_transaction failed")
+        print(f"Error: {e}")
+        return None    
