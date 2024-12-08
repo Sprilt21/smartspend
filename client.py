@@ -91,18 +91,26 @@ def main():
         if s == "1":
             print("-----Add a Budget------")
             add_budget(baseurl, username)
+            
+            print("-----------------------")
         elif s == "2":
             print("------Edit Budget------")
             edit_budget(baseurl, username)
+        
+            print("-----------------------")
         elif s == "3":
+            
             print("----Budget Summary-----")
             view_budgets_summary(baseurl, username)
+            print("-----------------------")
         elif s == "4":
             print("----New Transaction----")
             add_transaction(baseurl, username)
+            print("-----------------------")
         elif s == "5":
             print("---View Transaction----")
             view_transaction(baseurl, username)
+            print("-----------------------")    
         else:
             print("---Exited SmartSpend---")
             break
