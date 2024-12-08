@@ -38,6 +38,7 @@ CREATE TABLE transactions (
     transaction_amt decimal(10,2) not null,
     transaction_desc varchar(256) not null,
     transaction_date date not null,
+    receipt_bucketkey varchar(256) not null,
     PRIMARY KEY (transaction_id),
     FOREIGN KEY (user_id) REFERENCES users(user_id),
     FOREIGN KEY (budget_id) REFERENCES budgets(budget_id)
